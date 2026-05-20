@@ -9,6 +9,7 @@ function Header (){
                 <a href="/home">HOME</a>
                 <a href="/contactos">CONTACTOS</a>
             </nav>
+            <div className="clear"></div>
         </div> 
     )
 }
