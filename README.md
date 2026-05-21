@@ -18,3 +18,9 @@ If you are developing a production application, we recommend using TypeScript wi
 
 ## - iniliciar programa 
 Como correr programa --  npm run dev 
+
+## Icons site
+https://www.flaticon.com/br/
+
+## booststrap 4
+https://getbootstrap.com/docs/4.6/utilities/borders/
