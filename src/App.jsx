@@ -8,6 +8,7 @@ import Mensagem from './Mensagem';
 import Alerta from './Alerta';
 import Contador from './Contador';
 import Formulario from './Formulario'
+import Tarefas from './Tarefas'
 
 // Um componente React é uma função que devolve JSX (JavaScript + HTML)
 function App() {
@@ -37,7 +38,7 @@ function App() {
       <Alerta tipo="warning" texto="O componente Alerta está a funcionar"/>
 
       <Formulario />
-
+      <Tarefas />
     </div>
   );
 }

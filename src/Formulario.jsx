@@ -28,7 +28,7 @@ function Formulario() {
 
     return (
         <div className="mt-4 row">
-            <div class="col-8">
+            <div className="col-8">
                 <form onSubmit={handleSubmit}>
                     {/* Cada campo é controlado — o valor vem do estado React */}
                     <div className="form-group">
@@ -78,7 +78,7 @@ function Formulario() {
                 </form>
             </div>
 
-            <div class="col-4">
+            <div className="col-4">
                 {/* Mostra os dados submetidos se existirem */}
                 {dadosSubmetidos && (
                     <div className="card mt-4">
