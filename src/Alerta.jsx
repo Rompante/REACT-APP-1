@@ -1,7 +1,7 @@
-function Alerta(tipo) {
+function Alerta(props) {
   return (
-    <div className="alert alert-success" role="alert">
-        {tipo.alerta}
+    <div className={`alert alert-${props.tipo} text-center`} role="alert">
+        {props.texto}
     </div>
   );
 }
