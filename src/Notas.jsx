@@ -2,168 +2,95 @@ import React, { useState } from 'react';
 
 function Notas() {
 
-    const [formData, setFormData] = useState({
-        nome: '',
-        disciplina: '',
-        notasTestes: '',
-        testes: '',
-        notasTrabalhos: '',
-        trabalhos: '',
-        notaAtitude: '',
-        atitude: ''
-    });
+    const [resultado, setresultado] = useState("por favor, preencha os campos e clique em calcular");
+    const [porcentagemTestes, setPorcentagemTestes] = useState(60);
+    const [porcentagemTrabalhos, setPorcentagemTrabalhos] = useState(0);
+    const [porcentagemAtitudes, setPorcentagemAtitudes] = useState(40);
 
-    function controlNotasTestes(e) {
-        const value = e.target.value;
-        if (value < 0) {
-            setFormData({ ...formData, notasTestes: 0 });
-        } else if (value > 20) {
-            setFormData({ ...formData, notasTestes: 20 });
-        } else {
-            setFormData({ ...formData, notasTestes: value });
-        }
-    }
-    function controlTestes(e) {
-        const value = e.target.value;
-        if (value < 0) {
-            setFormData({ ...formData, testes: 0 });
-        } else if (value > 100) {
-            setFormData({ ...formData, testes: 100 });
-        } else {
-            setFormData({ ...formData, testes: value });
-        }
-    }
-    function controlNotasTrabalhos(e) {
-        const value = e.target.value;
-        if (value < 0) {
-            setFormData({ ...formData, notasTrabalhos: 0 });
-        } else if (value > 20) {
-            setFormData({ ...formData, notasTrabalhos: 20 });
-        } else {
-            setFormData({ ...formData, notasTrabalhos: value });
-        }
-    }
-    function controlTrabalhos(e) {
-        const value = e.target.value;
-        if (value < 0) {
-            setFormData({ ...formData, trabalhos: 0 });
-        } else if (value > 100) {
-            setFormData({ ...formData, trabalhos: 100 });
-        } else {
-            setFormData({ ...formData, trabalhos: value });
-        }
-    }
-    function controlNotaAtitude(e) {
-        const value = e.target.value;
-        if (value < 0) {
-            setFormData({ ...formData, notaAtitude: 0 });
-        } else if (value > 20) {
-            setFormData({ ...formData, notaAtitude: 20 });
-        } else {
-            setFormData({ ...formData, notaAtitude: value });
-        }
-    }
+    /**/
 
-    function controlAtitude(e) {
-        const value = e.target.value;
-        if (value < 0) {
-            setFormData({ ...formData, atitude: 0 });
-        } else if (value > 100) {
-            setFormData({ ...formData, atitude: 100 });
+    function calcularNotaFinal() {
+        
+        const notaTestes = (porcentagemTestes / 100) * parseFloat(document.getElementById("notastestes").value);
+        const notaTrabalhos = (porcentagemTrabalhos / 100) * parseFloat(document.getElementById("notastrabalhos").value);
+        const notaAtitudes = (porcentagemAtitudes / 100) * parseFloat(document.getElementById("notasatitudes").value);
+        //return (notaTestes + notaTrabalhos + notaAtitudes).toFixed(2);
+        if (porcentagemTestes + porcentagemTrabalhos + porcentagemAtitudes !== 100) {
+            setresultado("A soma das porcentagens deve ser igual a 100%");
         } else {
-            setFormData({ ...formData, atitude: value });
+            setresultado(`A nota final é: ${((notaTestes + notaTrabalhos + notaAtitudes).toFixed(2))}`);
         }
-    }
-
-    function mediaTresNotas(e) {
-        e.preventDefault();
-        const media = (parseFloat(formData.notasTestes) + parseFloat(formData.notasTrabalhos) + parseFloat(formData.notaAtitude)) / 3;
-        alert(`A média das três notas é: ${media.toFixed(2)}`);
-        if (media >= 9.5) {
-            alert('Aprovado!');
-        } else {
-            alert('Reprovado!');
-        }
-    }
-
-    function limparFormulario() {
-        setFormData({
-            nome: '',
-            disciplina: '',
-            notasTestes: '',
-            testes: '',
-            notasTrabalhos: '',
-            trabalhos: '',
-            notaAtitude: '',
-            atitude: ''
-        });
+        
     }
 
 
     return (
-        <div className="mt-4 row">
+        <div className="row">
 
-            <div className="w-100">
-                <h1>Cálculo da nota final</h1>
-                <h2>Dados do Aluno</h2>
+            <div className="col-12">
+                <h2>Cálculo de nota final</h2>
+                <h4>Dados do Aluno</h4>
             </div>
 
-            <form className="col-12 row">
-                <div className="col-8">
-                    <div className="form-group">
-                        <label>Nome do Aluno</label>
-                        <input type="text" className="form-control" value={formData.nome} onChange={(e) =>
-                            setFormData({ ...formData, nome: e.target.value })} required />
-                    </div>
-                </div>
-
-                <div className="col-4">
-                    <div className="form-group">
-                        <label>Disciplina</label>
-                        <input type="text" className="form-control" value={formData.disciplina} onChange={(e) =>
-                            setFormData({ ...formData, disciplina: e.target.value })} required />
-
-                    </div>
-                </div>
-
-                <div className="col-3">
-                    <div className="form-group">
-                        <label>Notas dos Testes</label>
-                        <input type="number" className="form-control" value={formData.notasTestes} onChange={controlNotasTestes} required />
+            <div className="col-12">
+                <form>
+                    <div className="form-row">
+                        <div className="form-group col-md-8">
+                            <label htmlFor="nomealuno">Nome do aluno</label>
+                            <input required type="text" className="form-control" id="nomealuno" />
+                        </div>
+                        <div className="form-group col-md-4">
+                            <label htmlFor="disciplina">Disciplina</label>
+                            <input required type="text" className="form-control" id="disciplina" />
+                        </div>
                     </div>
 
-                    <div className="form-group">
-                        <label>Notas dos Trabalhos</label>
-                        <input type="number" className="form-control" value={formData.notasTrabalhos} onChange={controlNotasTrabalhos} required />
+                    <div className="form-row">
+                        <div className="form-group col-md-3">
+                            <label htmlFor="notastestes">Notas dos testes</label>
+                            <input required type="number" min="0" max="20" step="0.1" className="form-control" id="notastestes" />
+                        </div>
+                        <div className="form-group col-md-3">
+                            <label htmlFor="porcentagemtestes">% dos testes</label>
+                            <input required type="number" min="0" max="100" value={porcentagemTestes} onChange={(e) => setPorcentagemTestes(parseFloat(e.target.value))} className="form-control" id="porcentagemtestes" />
+                        </div>
                     </div>
 
-                    <div className="form-group">
-                        <label>Nota de Atitude</label>
-                        <input type="number" className="form-control" value={formData.notaAtitude} onChange={controlNotaAtitude} required />
-                    </div>
-                </div>
-
-                <div className="col-3">
-                    <div className="form-group">
-                        <label>Testes (%)</label>
-                        <input type="number" className="form-control" value={formData.testes} onChange={controlTestes} required />
-                    </div>
-                    <div className="form-group">
-                        <label>Trabalhos (%)</label>
-                        <input type="number" className="form-control" value={formData.trabalhos} onChange={controlTrabalhos} required />
+                    
+                    <div className="form-row">
+                        <div className="form-group col-md-3">
+                            <label htmlFor="notastrabalhos">Notas dos trabalhos</label>
+                            <input required type="number" min="0" max="20" step="0.1" className="form-control" id="notastrabalhos" />
+                        </div>
+                        <div className="form-group col-md-3">
+                            <label htmlFor="porcentagemtrabalhos">% dos trabalhos</label>
+                            <input required type="number" min="0" max="100" value={porcentagemTrabalhos} onChange={(e) => setPorcentagemTrabalhos(parseFloat(e.target.value))} className="form-control" id="porcentagemtrabalhos" />
+                        </div>
                     </div>
 
-                    <div className="form-group">
-                        <label>Atitude (%)</label>
-                        <input type="number" className="form-control" value={formData.atitude} onChange={controlAtitude} required />
+                    
+                    <div className="form-row">
+                        <div className="form-group col-md-3">
+                            <label htmlFor="notasatitudes">Notas das atitudes</label>
+                            <input required type="number" min="0" max="20" step="0.1" className="form-control" id="notasatitudes" />
+                        </div>
+                        <div className="form-group col-md-3">
+                            <label htmlFor="porcentagematitudes">% das atitudes</label>
+                            <input required type="number" min="0" max="100" value={porcentagemAtitudes} onChange={(e) => setPorcentagemAtitudes(parseFloat(e.target.value))} className="form-control" id="porcentagematitudes" />
+                        </div>
                     </div>
-                </div>
-                <button className="btn btn-primary mt-3" onClick={mediaTresNotas}>Calcular Média</button>
-                <button className="btn btn-secondary mt-3 ml-2" onClick={limparFormulario}>Limpar</button>
 
-            </form>
+                    <button type="button" className="mt-3 btn btn-primary" onClick={calcularNotaFinal}>Calcular</button>
+                    &nbsp;
+                    <button type="reset" className="mt-3 btn btn-danger">Limpar</button>
+
+                    <div className="mt-3 mb-3">{resultado}</div>
+
+                </form>
+            </div>
+
         </div>
-    )
+    );
 }
 
-export default Notas; 
+export default Notas;
