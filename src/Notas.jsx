@@ -141,9 +141,6 @@ function Notas() {
                         <label>Nota de Atitude</label>
                         <input type="number" className="form-control" value={formData.notaAtitude} onChange={controlNotaAtitude} required />
                     </div>
-                <button type="submit" className="btn btn-primary" onClick={mediaTresNotas}>Calcular Média</button>
-                <button type="button" className="btn btn-outline-secondary"
-                        onClick={limparFormulario}>Limpar</button>
                 </div>
 
                 <div className="col-3">
@@ -161,6 +158,8 @@ function Notas() {
                         <input type="number" className="form-control" value={formData.atitude} onChange={controlAtitude} required />
                     </div>
                 </div>
+                <button className="btn btn-primary mt-3" onClick={mediaTresNotas}>Calcular Média</button>
+                <button className="btn btn-secondary mt-3 ml-2" onClick={limparFormulario}>Limpar</button>
 
             </form>
         </div>
